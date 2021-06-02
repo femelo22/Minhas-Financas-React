@@ -13,7 +13,7 @@ class Login extends React.Component {
     }
 
 
-    entrar = async () => {
+    entrar = async() => {
        axios.post('http://localhost:8080/usuarios/autenticar', {
            email: this.state.email,
            senha: this.state.senha

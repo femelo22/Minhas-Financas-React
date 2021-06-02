@@ -1,10 +1,20 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 class Home extends React.Component {
 
     state = {
         saldo: 0
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8080/usuarios/1/saldo')
+            .then( resp => {
+                this.setState({ saldo: resp.data })
+            }).catch( erro => {
+                console.error(erro.response)
+            })
     }
 
 
