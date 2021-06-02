@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 React Native
 Bootswatch
+Toastr -> Mostrando mensagens mais elegantes
 
 
 ## Available Scripts

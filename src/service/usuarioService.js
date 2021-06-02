@@ -8,7 +8,11 @@ class UsuarioService extends ApiService {
     }
 
     autenticar(obj){
-        return this.post('/autenticar', obj)
+        return this.post('/autenticar', obj);
+    }
+
+    obterSaldoPorId(id) {
+        return this.get(`/${id}/saldo`);
     }
 
 }
