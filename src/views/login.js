@@ -3,15 +3,15 @@ import Card from '../components/card'
 import FormGroup from '../components/form-group'
 import { withRouter } from 'react-router-dom';
 import UsuarioService from '../service/usuarioService';
-import localStorage from '../service/localStorageService';
 import localStorageService from '../service/localStorageService';
+import { mensagemErro } from '../components/toarst';
+
 
 class Login extends React.Component {
 
     state = {
         email: '',
-        senha: '',
-        mensagemErro: null
+        senha: ''
     }
 
     constructor() {
@@ -20,7 +20,9 @@ class Login extends React.Component {
     }
 
 
-    entrar = async () => {
+
+
+    entrar = () => {
         this.service.autenticar({
             email: this.state.email,
             senha: this.state.senha
@@ -28,7 +30,7 @@ class Login extends React.Component {
             localStorageService.adicionarItem('usuario_logado', response.data);
             this.props.history.push('/home');
         }).catch(error => {
-            this.setState({ mensagemErro: error.response.data })
+            mensagemErro(error.response.data)
         })
     }
 
@@ -43,11 +45,6 @@ class Login extends React.Component {
             <div className="row">
                 <div className="col-md-6" style={{ position: 'relative', left: '300px' }}>
                     <Card title="Login">
-                        <div className="row">
-                            <span>
-                                {this.state.mensagemErro}
-                            </span>
-                        </div>
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="b2-component">
@@ -70,7 +67,7 @@ class Login extends React.Component {
                                                 id="exampleInputPassword1"
                                                 placeholder="Password"
                                             />
-                                        </FormGroup>< br />
+                                        </FormGroup>< br/>
                                         <button onClick={this.entrar} className="btn btn-success">Entrar</button>
                                         <button onClick={this.prepararCadastro} className="btn btn-danger">Cadastrar</button>
                                     </fieldset>

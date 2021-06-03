@@ -6,6 +6,9 @@ import Rotas from './rotas';
 import Navbar from '../components/navbar';
 
 import '../custom.css'
+import 'toastr/build/toastr.css';
+import 'toastr/build/toastr.min.js';
+
 
 class App extends React.Component {
   render() {
