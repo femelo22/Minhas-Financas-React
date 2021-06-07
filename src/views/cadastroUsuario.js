@@ -21,13 +21,13 @@ class CadastroUsuario extends React.Component{
     }
 
     cadastrar = () => {
-
         const msgs = this.validar();
 
         if(msgs && msgs.length > 0) {
             msgs.forEach( (msg, index) => {
                 mensagemErro(msg);
             }) 
+            return false;
         }
 
         const usuario = {
