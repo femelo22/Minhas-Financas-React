@@ -5,16 +5,29 @@ import FormGroup from '../components/form-group';
 import SelectMenu from '../components/selectMenu';
 import LancamentoTable from '../views/lancamentosTable';
 
+import LancamentoService from '../service/lancamentoService';
+
 class ConsultaLancamentos extends React.Component {
 
     state = {
         ano: '',
         mes: '',
-        tipo: ''
+        tipo: '',
+        lancamentos: []
+    }
+
+    constructor() {
+        super();
+        this.service = new LancamentoService();
     }
 
     buscar = () => {
-        console.log(this.state);
+       const lancamentoFiltro = {
+           ano: this.state.ano,
+           mes: this.state.mes,
+           tipo: this.state.tipo,
+           usuario: this.state.usuario
+       }
     }
 
     render() {
@@ -39,11 +52,6 @@ class ConsultaLancamentos extends React.Component {
             { label: 'Selecione...', value: '' },
             { label: 'Despesa', value: 'DESPESA' },
             { label: 'Receita', value: 'RECEITA' },
-        ]
-
-        const lancamentos = [
-            { descricao: 'Salario', valor: 5000, mes: 1, tipo: 'Receita', status: 'Efetivado' }
-           
         ]
 
 
@@ -87,7 +95,7 @@ class ConsultaLancamentos extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="bs-component">
-                            <LancamentoTable lancamentos={lancamentos}/>
+                            <LancamentoTable lancamentos={this.state.lancamentos}/>
                         </div>
                     </div>
                 </div>
