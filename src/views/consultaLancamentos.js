@@ -4,7 +4,7 @@ import Card from '../components/card';
 import FormGroup from '../components/form-group';
 import SelectMenu from '../components/selectMenu';
 import LancamentoTable from '../views/lancamentosTable';
-
+import LocalStorageService from '../service/localStorageService';
 import LancamentoService from '../service/lancamentoService';
 
 class ConsultaLancamentos extends React.Component {
@@ -22,12 +22,23 @@ class ConsultaLancamentos extends React.Component {
     }
 
     buscar = () => {
+
+        const user = LocalStorageService.obterItem("usuario_logado");
+
        const lancamentoFiltro = {
            ano: this.state.ano,
            mes: this.state.mes,
            tipo: this.state.tipo,
-           usuario: this.state.usuario
+           usuario: user.id
        }
+
+       this.service.consultar(lancamentoFiltro)
+        .then(resp => {
+            console.log(resp)
+            this.setState({ lancamentos: resp.data })
+        }).catch( error => {
+            console.log(error)
+        })
     }
 
     render() {
