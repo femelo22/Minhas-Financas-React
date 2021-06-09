@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 React Native
 Bootswatch
 Toastr -> Mostrando mensagens mais elegantes
+PrimeReact -> Modais react estilizados (pop-up)
 
 
 ## Available Scripts
