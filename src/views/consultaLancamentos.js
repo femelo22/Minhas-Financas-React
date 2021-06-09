@@ -51,6 +51,28 @@ class ConsultaLancamentos extends React.Component {
             })
     }
 
+
+    editar = (id) => {
+        console.log(id);
+    }
+
+    deletar = ( lancamento ) => {
+
+        //remover do array
+        const lancamentos = this.state.lancamentos;
+        const index = lancamentos.indexOf(lancamento);
+        lancamentos.splice(index, 1);
+        //atualizar a váriavel de lancamentos
+        this.setState(lancamentos);
+
+        this.service.deletar(lancamento.id)
+            .then(resposta => {
+                message.mensagemSucesso('Lançamento deletado!');
+        }).catch(error => {
+                message.mensagemErro('Ocorreu um erro ao tentar deletar o Lançamento.')
+        })
+    }
+
     render() {
 
         const meses = this.service.obterListaMeses();
@@ -107,7 +129,7 @@ class ConsultaLancamentos extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="bs-component">
-                            <LancamentoTable lancamentos={this.state.lancamentos} />
+                            <LancamentoTable lancamentos={this.state.lancamentos} deleteAction={this.deletar} editarAction={this.editar}/>
                         </div>
                     </div>
                 </div>
