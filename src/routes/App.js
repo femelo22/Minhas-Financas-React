@@ -9,8 +9,6 @@ import '../custom.css'
 import 'toastr/build/toastr.css';
 import 'toastr/build/toastr.min.js';
 
-import { Button } from 'primereact/button';
-
 import 'primereact/resources/themes/saga-blue/theme.css'
 import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
@@ -20,7 +18,6 @@ class App extends React.Component {
     return (
       <>
         <Navbar />
-        <Button label="Click" icon="pi pi-check" iconPos="right" />
         <div className="container">
             <Rotas />
         </div>
