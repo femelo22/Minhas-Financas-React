@@ -24,6 +24,8 @@ class ConsultaLancamentos extends React.Component {
         lancamentoDeletar: {}
     }
 
+
+
     constructor() {
         super();
         this.service = new LancamentoService();
@@ -62,6 +64,7 @@ class ConsultaLancamentos extends React.Component {
 
 
     editar = (id) => {
+        this.props.history.push(`/cadastro-lancamentos/${id}`)
         console.log(id);
     }
 
@@ -152,7 +155,10 @@ class ConsultaLancamentos extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="bs-component">
-                            <LancamentoTable lancamentos={this.state.lancamentos} deleteAction={this.abrirConfirmacao} editarAction={this.editar} />
+                            <LancamentoTable 
+                            lancamentos={this.state.lancamentos} 
+                            deleteAction={this.abrirConfirmacao} 
+                            editarAction={this.editar} />
                         </div>
                     </div>
                 </div>

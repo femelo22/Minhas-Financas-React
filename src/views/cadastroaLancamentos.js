@@ -18,7 +18,22 @@ class CadastroLancamentos extends React.Component {
         mes: '',
         ano: '',
         tipoLancamento: '',
-        statusLancamento: ''
+        statusLancamento: '',
+        usuario: null
+    }
+
+    componentDidMount(){
+        const params = this.props.match.params;
+
+        if(params.id){
+            this.service.obterPorId(params.id)
+                .then(resposta => {
+                    this.setState({...resposta.data}) // passa todas as propriedades do objeto
+                }).catch(erros =>{
+                    messages.mensagemErro(erros.response.data)
+                })
+        }
+        console.log("params: " + params);
     }
 
     constructor() {
@@ -48,6 +63,32 @@ class CadastroLancamentos extends React.Component {
 
         this.service
             .salvar(lancamento)
+                .then( resposta => {
+                    console.log(resposta)
+                    //Navegação de páginas
+                    this.props.history.push('/consulta-lancamentos');
+                    messages.mensagemSucesso('Lançamento registrado com sucesso!')
+                }).catch( error => {
+                    console.log(error)
+                    messages.mensagemErro(error.response.data)
+                })
+    }
+
+    atualizar = () => {
+        const usuario = LocalStorageService.obterItem('usuario_logado');
+
+        const lancamento = {
+            descricao: this.state.descricao,
+            valor: this.state.valor,
+            mes: this.state.mes,
+            ano: this.state.ano,
+            tipoLancamento: this.state.tipoLancamento,
+            usuario: usuario,
+            id: this.state.id
+        }
+
+        this.service
+            .atualizar(lancamento)
                 .then( resposta => {
                     console.log(resposta)
                     //Navegação de páginas
@@ -139,6 +180,7 @@ class CadastroLancamentos extends React.Component {
                 <div className="row">
                     <div className="col-md-6">
                         <button className="btn btn-success" onClick={this.submit}>Salvar</button>
+                        <button className="btn btn-primary" onClick={this.atualizar}>Atualizar</button>
                         <button className="btn btn-danger" onClick={e =>  this.props.history.push('/consulta-lancamentos')}>Cancelar</button>
                     </div>
                 </div>
